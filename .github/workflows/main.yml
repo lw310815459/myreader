@@ -5,16 +5,19 @@ on:
     branches: [ main ]
   workflow_dispatch:   # 允许手动触发
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true   # 立即启用 Node.js 24，确保完全兼容
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4          # 升级到 v4（支持 Node.js 20/24）
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5      # 升级到 v5（支持 Node.js 20/24）
       with:
         python-version: '3.10'
 
@@ -38,7 +41,7 @@ jobs:
         buildozer android debug
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4    # 也建议升级到 v4，保持一致性
       with:
         name: myreader-apk
         path: bin/*.apk
