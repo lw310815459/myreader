@@ -20,6 +20,16 @@ jobs:
       uses: actions/setup-python@v5      # 升级到 v5（支持 Node.js 20/24）
       with:
         python-version: '3.10'
+        - name: Install system dependencies
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y \
+      git zip unzip openjdk-17-jdk \
+      autoconf libtool pkg-config \
+      zlib1g-dev libncurses5-dev libncursesw5-dev \
+      libtinfo5 cmake libffi-dev libssl-dev \
+      liblzma-dev libbz2-dev libsqlite3-dev \
+      python3-pip python3-setuptools python3-dev
 
     - name: Install system dependencies
       run: |
@@ -36,9 +46,9 @@ jobs:
         pip install --upgrade pip
         pip install buildozer==1.5.0 cython
 
-    - name: Build APK
-      run: |
-        buildozer android debug
+    -- name: Build APK
+  run: |
+    buildozer android debug || buildozer android debug
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4    # 也建议升级到 v4，保持一致性
