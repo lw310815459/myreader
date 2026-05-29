@@ -11,7 +11,7 @@ android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, RECORD_AUDI
 
 android.api = 30
 android.minapi = 24
-android.ndk = 25c
+android.ndk = 23b
 android.sdk = 30
 android.build_tools = 30.0.3
 android.use_aapt2 = True
